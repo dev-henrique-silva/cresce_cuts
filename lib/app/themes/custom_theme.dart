@@ -5,6 +5,7 @@ ThemeData customTheme = ThemeData(
     primary: Colors.white,
     secondary: Color(0xff007FBA),
     tertiary: Color(0xffE1E1E1),
+    tertiaryContainer: Color(0xFFD4D4D4),
   ),
   textTheme: TextTheme(
     titleLarge: TextStyle(
@@ -36,6 +37,11 @@ ThemeData customTheme = ThemeData(
       fontSize: 12.0,
       fontWeight: FontWeight.w400,
       color: Colors.white,
+    ),
+    displayLarge: TextStyle(
+      fontSize: 18.0,
+      fontWeight: FontWeight.w700,
+      color: Color.fromARGB(255, 189, 189, 189),
     ),
   ),
   useMaterial3: true,
