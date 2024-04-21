@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:valevantagens/app/modules/common/widgets/bottom_app_bar_widget.dart';
 import 'package:valevantagens/app/modules/common/widgets/image_view.dart';
-import 'package:valevantagens/app/utils/args/view_product_args.dart';
+import 'package:valevantagens/app/modules/home/utils/args/view_product_args.dart';
 import 'package:valevantagens/app/utils/extensions/double_extensions.dart';
 
 class ViewProductPage extends StatefulWidget {

@@ -4,10 +4,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:valevantagens/app/modules/common/widgets/bottom_app_bar_widget.dart';
 import 'package:valevantagens/app/modules/home/controllers/home_controller.dart';
+import 'package:valevantagens/app/modules/home/utils/args/view_product_args.dart';
 import 'package:valevantagens/app/modules/home/widgets/card_products_widget.dart';
 import 'package:valevantagens/app/modules/home/widgets/loading_erro_products_widget.dart';
 import 'package:valevantagens/app/modules/home/widgets/skeleton/card_product_skeleton.dart';
-import 'package:valevantagens/app/utils/args/view_product_args.dart';
 
 class HomePage extends StatefulWidget {
   final HomeController controller;
