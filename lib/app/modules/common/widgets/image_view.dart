@@ -9,7 +9,7 @@ class ImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: urlImage,
-      fit: BoxFit.cover,
+      fit: BoxFit.contain,
       placeholder: (context, str) => imagePlaceholder(context),
       errorWidget: (context, obj, str) => noPhotoPlaceholder(context),
     );

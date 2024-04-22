@@ -29,7 +29,7 @@ class UploadImageWidget extends StatelessWidget {
                   ? ImageView(urlImage: urlImage)
                   : Image.asset(
                       'assets/images/app/cloud-upload.png',
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
             ),
           ),
