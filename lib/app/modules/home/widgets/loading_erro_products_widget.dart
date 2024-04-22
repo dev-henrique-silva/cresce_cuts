@@ -17,7 +17,7 @@ class LoadingErroProductsWidget extends StatelessWidget {
           SizedBox(height: 8.0),
           Text(
             'Falha ao carregar produtos',
-            style: Theme.of(context).textTheme.displayLarge,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
         ],
       ),

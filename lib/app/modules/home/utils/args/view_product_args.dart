@@ -1,9 +1,7 @@
 class ViewProductArgs {
   final String image;
-
   final String title;
   final double price;
-
   final String category;
   final String description;
 

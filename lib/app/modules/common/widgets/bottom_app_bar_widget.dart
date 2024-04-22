@@ -28,7 +28,7 @@ class BottomAppBarWidget extends StatelessWidget {
               child: ElevatedButton(
                 child: Text(
                   title,
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(

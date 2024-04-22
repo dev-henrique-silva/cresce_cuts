@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:valevantagens/app/modules/common/widgets/bottom_app_bar_widget.dart';
 import 'package:valevantagens/app/modules/common/widgets/image_view.dart';
+import 'package:valevantagens/app/modules/discounts/utils/args/register_discount_args.dart';
+import 'package:valevantagens/app/modules/discounts/widgets/bottom_sheet_discount_type_widget.dart';
 import 'package:valevantagens/app/modules/home/utils/args/view_product_args.dart';
 import 'package:valevantagens/app/utils/extensions/double_extensions.dart';
 
@@ -90,7 +92,21 @@ class _ViewProductPageState extends State<ViewProductPage> {
       ),
       bottomNavigationBar: BottomAppBarWidget(
         title: 'Cadastrar desconto',
-        onPressed: () => {},
+        onPressed: () => {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return BottomSheetDiscountTypeWidget(
+                args: RegisterDiscountArgs(
+                  title: args.title,
+                  description: args.description,
+                  price: args.price,
+                  image: args.image,
+                ),
+              );
+            },
+          ),
+        },
       ),
     );
   }
