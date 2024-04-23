@@ -19,11 +19,13 @@ class DiscountForPriceWidget extends StatelessWidget {
         TextFieldWidget(
           label: 'Preço "De"',
           width: 160,
+          inputDoubleType: true,
           controller: ofController,
         ),
         TextFieldWidget(
           label: 'Preço "POR"',
           width: 160,
+          inputDoubleType: true,
           controller: byController,
         ),
       ],

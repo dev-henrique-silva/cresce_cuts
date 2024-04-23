@@ -44,10 +44,11 @@ class _ViewProductPageState extends State<ViewProductPage> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(height: 16.0),
                 Container(
                   padding: EdgeInsets.all(20),
                   width: double.infinity,
@@ -92,7 +93,8 @@ class _ViewProductPageState extends State<ViewProductPage> {
                       ),
                     ],
                   ),
-                )
+                ),
+                SizedBox(height: 16.0),
               ],
             ),
           ),
@@ -107,9 +109,10 @@ class _ViewProductPageState extends State<ViewProductPage> {
                   args: RegisterDiscountArgs(
                     title: args.title,
                     description: args.description,
-                    price: args.price,
+                    price: args.price.toString(),
                     image: args.image,
                   ),
+                  route: './register_discount',
                 );
               },
             ),

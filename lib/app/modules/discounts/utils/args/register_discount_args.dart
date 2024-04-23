@@ -2,7 +2,7 @@ class RegisterDiscountArgs {
   final String? title;
   final String? description;
   final String? discountType;
-  final double? price;
+  final String? price;
   final String? image;
   final bool discountForPrice;
   final bool discountForPercentage;
@@ -23,7 +23,7 @@ class RegisterDiscountArgs {
     String? title,
     String? description,
     String? discountType,
-    double? price,
+    String? price,
     String? image,
     bool? discountForPrice,
     bool? discountForPercentage,

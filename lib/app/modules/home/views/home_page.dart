@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:valevantagens/app/modules/common/widgets/bottom_app_bar_widget.dart';
+import 'package:valevantagens/app/modules/common/widgets/custom_scroll_behavior.dart';
 import 'package:valevantagens/app/modules/home/controllers/home_controller.dart';
 import 'package:valevantagens/app/modules/home/utils/args/view_product_args.dart';
 import 'package:valevantagens/app/modules/home/widgets/card_products_widget.dart';
@@ -31,72 +32,79 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        elevation: 0.8,
-        shadowColor: Theme.of(context).colorScheme.secondary,
-        centerTitle: true,
-        title: Text(
-          'Vale Vantagens',
-          style: Theme.of(context).textTheme.titleLarge,
+    return ScrollConfiguration(
+      behavior: CustomScrollBehavior(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          elevation: 0.8,
+          shadowColor: Theme.of(context).colorScheme.secondary,
+          centerTitle: true,
+          title: Text(
+            'Vale Vantagens',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
-      ),
-      body: Observer(
-        builder: (_) {
-          if (controller.productFuture == null ||
-              controller.productFuture!.status == FutureStatus.pending) {
-            controller.isLoading = true;
-            return CardProductSkeleton();
-          }
+        body: Observer(
+          builder: (_) {
+            if (controller.productFuture == null ||
+                controller.productFuture!.status == FutureStatus.pending) {
+              controller.isLoading = true;
+              return CardProductSkeleton();
+            }
 
-          if (controller.productFuture!.status == FutureStatus.rejected) {
-            controller.loadingError = true;
-            return LoadingErroProductsWidget();
-          }
+            if (controller.productFuture!.status == FutureStatus.rejected) {
+              controller.loadingError = true;
+              return LoadingErroProductsWidget();
+            }
 
-          final products = controller.productFuture!.result;
-          controller.isLoading = false;
+            final products = controller.productFuture!.result;
+            controller.isLoading = false;
 
-          return ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              final product = products[index];
+            return ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
 
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () => {
-                    Modular.to.pushNamed(
-                      './view_product',
-                      arguments: ViewProductArgs(
-                        image: product.image,
-                        title: product.title,
-                        price: product.price,
-                        category: product.category,
-                        description: product.description,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () => {
+                      Modular.to.pushNamed(
+                        './view_product',
+                        arguments: ViewProductArgs(
+                          image: product.image,
+                          title: product.title,
+                          price: product.price,
+                          category: product.category,
+                          description: product.description,
+                        ),
                       ),
+                    },
+                    child: CardProductWidget(
+                      product: products[index],
                     ),
-                  },
-                  child: CardProductWidget(
-                    product: products[index],
                   ),
+                );
+              },
+            );
+          },
+        ),
+        bottomNavigationBar: Observer(
+          builder: (_) {
+            return BottomAppBarWidget(
+              isLoading: controller.isLoading,
+              hideBottomAppBar: controller.loadingError,
+              title: 'Desconto',
+              onPressed: () => {
+                Modular.to.pushNamed(
+                  '/discount',
                 ),
-              );
-            },
-          );
-        },
-      ),
-      bottomNavigationBar: Observer(
-        builder: (_) {
-          return BottomAppBarWidget(
-            isLoading: controller.isLoading,
-            loadingError: controller.loadingError,
-            title: 'Desconto',
-            onPressed: () => {},
-          );
-        },
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:valevantagens/app/modules/common/widgets/image_view.dart';
+import 'package:valevantagens/app/modules/discounts/widgets/button_image_gallery_widget.dart';
 
 class UploadImageWidget extends StatelessWidget {
   final String urlImage;
+  final File? fileImage;
+  final VoidCallback onTap;
 
   const UploadImageWidget({
     super.key,
     required this.urlImage,
+    required this.onTap,
+    this.fileImage,
   });
 
   @override
@@ -24,39 +31,35 @@ class UploadImageWidget extends StatelessWidget {
             padding: EdgeInsets.all(10),
             width: 350,
             height: 206,
-            child: Center(
-              child: urlImage.isNotEmpty
-                  ? ImageView(urlImage: urlImage)
-                  : Image.asset(
-                      'assets/images/app/cloud-upload.png',
-                      fit: BoxFit.contain,
-                    ),
+            child: GestureDetector(
+              onTap: onTap,
+              child: Center(
+                child: urlImage.isNotEmpty
+                    ? ImageView(urlImage: urlImage)
+                    : Image.asset(
+                        'assets/images/app/cloud-upload.png',
+                        fit: BoxFit.contain,
+                      ),
+              ),
             ),
           ),
         ),
-        urlImage.isNotEmpty
+        if (fileImage != null)
+          Container(
+            padding: EdgeInsets.all(10),
+            width: 350,
+            height: 206,
+            child: Center(
+                child: Image.file(
+              fileImage!,
+              fit: BoxFit.fill,
+            )),
+          ),
+        urlImage.isNotEmpty || fileImage != null
             ? Positioned(
                 top: 8,
                 right: 8,
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        'assets/images/app/cloud-upload.png',
-                        color: Theme.of(context).colorScheme.primary,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                ),
+                child: ButtonImageGalleryWidget(onTap: onTap),
               )
             : SizedBox.shrink(),
       ],

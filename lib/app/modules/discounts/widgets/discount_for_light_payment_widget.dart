@@ -23,17 +23,20 @@ class DiscountForLightPaymentWidget extends StatelessWidget {
             TextFieldWidget(
               label: 'Leve',
               width: 160,
+              inputDoubleType: true,
               controller: lightController,
             ),
             TextFieldWidget(
               label: 'Pague',
               width: 160,
+              inputDoubleType: true,
               controller: paymentController,
             ),
           ],
         ),
         TextFieldWidget(
           label: 'Preço',
+          inputDoubleType: true,
           controller: priceLightPaymentController,
         ),
       ],

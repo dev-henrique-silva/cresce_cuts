@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 ThemeData customTheme = ThemeData(
   colorScheme: ColorScheme.light(
     primary: Colors.white,
+    inversePrimary: Color(0xFF2A363B),
     secondary: Color(0xff007FBA),
-    onSecondary: Color.fromARGB(179, 0, 127, 186),
+    onSecondary: Color(0xB3007FBA),
+    secondaryContainer: Color(0x83007FBA),
     tertiary: Color(0xffE1E1E1),
     onTertiary: Color(0xffDEDEDE),
     tertiaryContainer: Color(0xFFD4D4D4),
@@ -58,5 +60,4 @@ ThemeData customTheme = ThemeData(
       color: Colors.white,
     ),
   ),
-  useMaterial3: true,
 );

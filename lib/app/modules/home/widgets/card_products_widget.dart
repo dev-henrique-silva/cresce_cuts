@@ -50,7 +50,7 @@ class CardProductWidget extends StatelessWidget {
                     children: [
                       Text(
                         product.title,
-                        maxLines: 1,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
@@ -73,7 +73,7 @@ class CardProductWidget extends StatelessWidget {
             Text(
               product.description,
               softWrap: true,
-              maxLines: 2,
+              maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyMedium,
             )

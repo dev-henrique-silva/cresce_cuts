@@ -8,7 +8,7 @@ class BottomAppBarSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Shimmer.fromColors(
           highlightColor: Theme.of(context).colorScheme.tertiaryContainer,
           baseColor: Theme.of(context).colorScheme.tertiary,

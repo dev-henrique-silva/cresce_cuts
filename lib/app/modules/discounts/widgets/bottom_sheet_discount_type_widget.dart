@@ -2,13 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:valevantagens/app/modules/discounts/utils/args/register_discount_args.dart';
 
-class BottomSheetDiscountTypeWidget extends StatelessWidget {
-  final RegisterDiscountArgs args;
+class BottomSheetDiscountTypeWidget extends StatefulWidget {
+  final RegisterDiscountArgs? args;
+  final String route;
 
   const BottomSheetDiscountTypeWidget({
     super.key,
-    required this.args,
+    this.args,
+    required this.route,
   });
+
+  @override
+  State<BottomSheetDiscountTypeWidget> createState() =>
+      _BottomSheetDiscountTypeWidgetState();
+}
+
+class _BottomSheetDiscountTypeWidgetState
+    extends State<BottomSheetDiscountTypeWidget> {
+  RegisterDiscountArgs get args => widget.args ?? RegisterDiscountArgs();
+  String get route => widget.route;
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +68,9 @@ class BottomSheetDiscountTypeWidget extends StatelessWidget {
                 onTap: () {
                   goToRegisterDiscount(
                     args: args.copyWith(
-                        discountType: 'Desconto por preço',
-                        discountForPrice: true),
+                      discountType: 'Precificação',
+                      discountForPrice: true,
+                    ),
                   );
                   Navigator.pop(context);
                 },
@@ -86,7 +99,7 @@ class BottomSheetDiscountTypeWidget extends StatelessWidget {
                 onTap: () {
                   goToRegisterDiscount(
                     args: args.copyWith(
-                      discountType: 'Desconto por percentual',
+                      discountType: 'Percentual',
                       discountForPercentage: true,
                     ),
                   );
@@ -117,7 +130,7 @@ class BottomSheetDiscountTypeWidget extends StatelessWidget {
                 onTap: () {
                   goToRegisterDiscount(
                     args: args.copyWith(
-                      discountType: 'Desconto por leve pague',
+                      discountType: 'Leve Pague',
                       discountForLightPayment: true,
                     ),
                   );
@@ -132,9 +145,6 @@ class BottomSheetDiscountTypeWidget extends StatelessWidget {
   }
 
   void goToRegisterDiscount({required RegisterDiscountArgs args}) {
-    Modular.to.pushNamed(
-      './register_discount',
-      arguments: args,
-    );
+    Modular.to.pushNamed(route, arguments: args);
   }
 }

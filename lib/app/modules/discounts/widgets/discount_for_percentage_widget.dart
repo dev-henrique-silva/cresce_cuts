@@ -19,6 +19,7 @@ class DiscountForPercentageWidget extends StatelessWidget {
         TextFieldWidget(
           label: 'Preço',
           width: 160,
+          inputDoubleType: true,
           controller: pricePercentageController,
         ),
         TextFieldWidget(

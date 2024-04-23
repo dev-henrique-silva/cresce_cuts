@@ -6,3 +6,9 @@ extension RealFormat on num {
     return format.format(this);
   }
 }
+
+extension DateTimeExtension on DateTime {
+  DateTime scheduleDateOneDayLater() {
+    return this.add(Duration(days: 1));
+  }
+}

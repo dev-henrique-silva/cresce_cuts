@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:valevantagens/app/utils/debouncer/debouncer.dart';
+import 'package:valevantagens/app/utils/formatter/formatter.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String label;
   final double height;
   final double width;
   final bool enabled;
+  final bool inputDoubleType;
   final TextEditingController controller;
   const TextFieldWidget({
     Key? key,
@@ -13,6 +17,7 @@ class TextFieldWidget extends StatefulWidget {
     this.width = double.infinity,
     this.enabled = true,
     required this.controller,
+    this.inputDoubleType = false,
   }) : super(key: key);
 
   @override
@@ -24,7 +29,16 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   double get height => widget.height;
   double get width => widget.width;
   bool get enabled => widget.enabled;
+  bool get inputDoubleType => widget.inputDoubleType;
   TextEditingController get controller => widget.controller;
+
+  Debouncer _debouncer = Debouncer(milliseconds: 1500);
+
+  @override
+  void initState() {
+    if (inputDoubleType) Formatter.toCurrencyReal(controller.text, controller);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +56,23 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             maxLines: null,
             expands: true,
             enabled: enabled,
+            keyboardType: inputDoubleType
+                ? TextInputType.numberWithOptions(decimal: true)
+                : TextInputType.text,
+            inputFormatters: inputDoubleType
+                ? <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
+                  ]
+                : null,
+            onChanged: (value) {
+              if (inputDoubleType) {
+                _debouncer.run(
+                  () {
+                    Formatter.toCurrencyReal(value, controller);
+                  },
+                );
+              }
+            },
             cursorColor: Theme.of(context).colorScheme.secondary,
             style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(

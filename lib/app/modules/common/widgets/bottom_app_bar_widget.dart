@@ -5,26 +5,26 @@ class BottomAppBarWidget extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
   final bool isLoading;
-  final bool loadingError;
+  final bool hideBottomAppBar;
 
   const BottomAppBarWidget({
     Key? key,
     required this.title,
     this.onPressed,
     this.isLoading = false,
-    this.loadingError = false,
+    this.hideBottomAppBar = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (loadingError) {
+    if (hideBottomAppBar) {
       return SizedBox.shrink();
     }
     return isLoading
         ? BottomAppBarSkeleton()
         : BottomAppBar(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: ElevatedButton(
                 child: Text(
                   title,
