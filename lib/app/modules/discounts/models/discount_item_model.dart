@@ -19,7 +19,7 @@ class DiscountItemModel {
 
   DiscountItemModel({
     this.id,
-    required this.isActive,
+    this.isActive = false,
     required this.discountName,
     required this.description,
     required this.discountType,

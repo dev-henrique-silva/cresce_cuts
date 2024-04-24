@@ -128,7 +128,7 @@ class _CardDiscountSkeletonState extends State<CardDiscountSkeleton> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SwitchButtonWidget(),
+                    SwitchButtonWidget(isActive: true),
                   ],
                 ),
               ),

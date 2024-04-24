@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +9,19 @@ class ImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: urlImage,
-      fit: BoxFit.contain,
-      placeholder: (context, str) => imagePlaceholder(context),
-      errorWidget: (context, obj, str) => noPhotoPlaceholder(context),
-    );
+    if (urlImage.contains('http')) {
+      return CachedNetworkImage(
+        imageUrl: urlImage,
+        fit: BoxFit.contain,
+        placeholder: (context, str) => imagePlaceholder(context),
+        errorWidget: (context, obj, str) => noPhotoPlaceholder(context),
+      );
+    } else {
+      return Image.file(
+        File(urlImage),
+        fit: BoxFit.contain,
+      );
+    }
   }
 
   Widget imagePlaceholder(BuildContext context) {

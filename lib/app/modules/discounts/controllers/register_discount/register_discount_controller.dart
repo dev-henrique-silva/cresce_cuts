@@ -5,7 +5,7 @@ import 'package:mobx/mobx.dart';
 import 'package:valevantagens/app/modules/discounts/models/discount_item_model.dart';
 import 'package:valevantagens/app/modules/discounts/services/discount_database/discount_database.dart';
 import 'package:valevantagens/app/modules/discounts/services/discount_database/i_discount_database.dart';
-import 'package:valevantagens/app/modules/discounts/utils/args/save_discount_args.dart';
+import 'package:valevantagens/app/modules/discounts/utils/args/discount_args.dart';
 import 'package:valevantagens/app/modules/discounts/utils/date_activation_inactivation.dart';
 import 'package:valevantagens/app/utils/formatter/formatter.dart';
 
@@ -21,7 +21,7 @@ abstract class _RegisterDiscountControllerBase with Store {
       : _discountDatabase = discountDatabase;
 
   @observable
-  SaveDiscountArgs? args;
+  DiscountArgs? args;
 
   @observable
   File? imageFile;
@@ -75,13 +75,35 @@ abstract class _RegisterDiscountControllerBase with Store {
     String? discountType,
   }) {
     if (discountType == 'Precificação' && priceOf != null && priceBy != null) {
-      return priceOf - priceBy;
+      final result = priceOf - priceBy;
+      return double.tryParse(result.toStringAsFixed(2)) ?? 0.0;
     }
     return 0.0;
   }
 
   @action
-  bool validateFields({required SaveDiscountArgs args}) {
+  void setActivationInactivationDate(
+      {String? activation, String? inactivation}) {
+    if (activation != null) {
+      activationDate = DateTime.parse(activation);
+
+      if (inactivation != null) {
+        inactivationDate = DateTime.parse(inactivation);
+      }
+    }
+  }
+
+  @action
+  dynamic setImageDiscount({String? image, File? imageFile}) {
+    if (imageFile != null) {
+      return imageFile.path;
+    }
+
+    return image ?? '';
+  }
+
+  @action
+  bool validateFields({required DiscountArgs args}) {
     List<String> fields = [
       args.discountName,
       args.description,
@@ -99,7 +121,7 @@ abstract class _RegisterDiscountControllerBase with Store {
       return false;
     }
 
-    if (args.image.isEmpty || imageFile == null) {
+    if (args.image.isEmpty && imageFile == null) {
       return false;
     }
 
@@ -112,7 +134,7 @@ abstract class _RegisterDiscountControllerBase with Store {
     return true;
   }
 
-  bool validateFieldsPrecification(SaveDiscountArgs args) {
+  bool validateFieldsPrecification(DiscountArgs args) {
     List<String> fieldsPrecification = [
       args.priceOf,
       args.priceBy,
@@ -127,7 +149,7 @@ abstract class _RegisterDiscountControllerBase with Store {
     return true;
   }
 
-  bool validateFieldsPercentage(SaveDiscountArgs args) {
+  bool validateFieldsPercentage(DiscountArgs args) {
     List<String> fieldsPercentage = [
       args.pricePercentage,
       args.percentage,
@@ -142,7 +164,7 @@ abstract class _RegisterDiscountControllerBase with Store {
     return true;
   }
 
-  bool validateFieldsLightPayment(SaveDiscountArgs args) {
+  bool validateFieldsLightPayment(DiscountArgs args) {
     List<String> fieldsLightPayment = [
       args.light,
       args.payment,
@@ -159,7 +181,7 @@ abstract class _RegisterDiscountControllerBase with Store {
   }
 
   @action
-  void saveDiscount({required SaveDiscountArgs args}) {
+  void saveDiscount({required DiscountArgs args}) {
     final discount = DiscountItemModel(
       isActive: validateDiscountIsActive(
         activationDate: args.dateActivation,

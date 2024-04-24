@@ -1,4 +1,4 @@
-class SaveDiscountArgs {
+class DiscountArgs {
   final bool isActive;
   final String discountName;
   final String description;
@@ -16,7 +16,7 @@ class SaveDiscountArgs {
   final DateTime? dateInactivation;
   final String image;
 
-  SaveDiscountArgs({
+  DiscountArgs({
     this.isActive = false,
     required this.discountName,
     required this.description,

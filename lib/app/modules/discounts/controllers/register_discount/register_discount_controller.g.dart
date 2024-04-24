@@ -13,13 +13,13 @@ mixin _$RegisterDiscountController on _RegisterDiscountControllerBase, Store {
       Atom(name: '_RegisterDiscountControllerBase.args', context: context);
 
   @override
-  SaveDiscountArgs? get args {
+  DiscountArgs? get args {
     _$argsAtom.reportRead();
     return super.args;
   }
 
   @override
-  set args(SaveDiscountArgs? value) {
+  set args(DiscountArgs? value) {
     _$argsAtom.reportWrite(value, super.args, () {
       super.args = value;
     });
@@ -152,7 +152,33 @@ mixin _$RegisterDiscountController on _RegisterDiscountControllerBase, Store {
   }
 
   @override
-  bool validateFields({required SaveDiscountArgs args}) {
+  void setActivationInactivationDate(
+      {String? activation, String? inactivation}) {
+    final _$actionInfo =
+        _$_RegisterDiscountControllerBaseActionController.startAction(
+            name:
+                '_RegisterDiscountControllerBase.setActivationInactivationDate');
+    try {
+      return super.setActivationInactivationDate(
+          activation: activation, inactivation: inactivation);
+    } finally {
+      _$_RegisterDiscountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setImageDiscount({String? image, File? imageFile}) {
+    final _$actionInfo = _$_RegisterDiscountControllerBaseActionController
+        .startAction(name: '_RegisterDiscountControllerBase.setImageDiscount');
+    try {
+      return super.setImageDiscount(image: image, imageFile: imageFile);
+    } finally {
+      _$_RegisterDiscountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool validateFields({required DiscountArgs args}) {
     final _$actionInfo = _$_RegisterDiscountControllerBaseActionController
         .startAction(name: '_RegisterDiscountControllerBase.validateFields');
     try {
@@ -163,7 +189,7 @@ mixin _$RegisterDiscountController on _RegisterDiscountControllerBase, Store {
   }
 
   @override
-  void saveDiscount({required SaveDiscountArgs args}) {
+  void saveDiscount({required DiscountArgs args}) {
     final _$actionInfo = _$_RegisterDiscountControllerBaseActionController
         .startAction(name: '_RegisterDiscountControllerBase.saveDiscount');
     try {

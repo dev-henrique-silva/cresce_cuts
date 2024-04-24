@@ -4,8 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:valevantagens/app/modules/common/widgets/bottom_app_bar_widget.dart';
 import 'package:valevantagens/app/modules/common/widgets/custom_scroll_behavior.dart';
 import 'package:valevantagens/app/modules/discounts/controllers/register_discount/register_discount_controller.dart';
+import 'package:valevantagens/app/modules/discounts/utils/args/discount_args.dart';
 import 'package:valevantagens/app/modules/discounts/utils/args/register_discount_args.dart';
-import 'package:valevantagens/app/modules/discounts/utils/args/save_discount_args.dart';
 import 'package:valevantagens/app/modules/discounts/utils/date_activation_inactivation.dart';
 import 'package:valevantagens/app/modules/discounts/widgets/date_activation_and_inactivation.dart';
 import 'package:valevantagens/app/modules/discounts/widgets/discount_for_light_payment_widget.dart';
@@ -75,16 +75,21 @@ class _RegisterDiscountPageState extends State<RegisterDiscountPage> {
     discountTypeController = TextEditingController(text: args.discountType);
 
     ofController = TextEditingController(text: args.priceOf);
-    byController = TextEditingController();
+    byController = TextEditingController(text: args.priceBy);
 
     pricePercentageController =
         TextEditingController(text: args.pricePercentage);
-    percentageController = TextEditingController();
+    percentageController = TextEditingController(text: args.percentage);
 
-    lightController = TextEditingController();
-    paymentController = TextEditingController();
+    lightController = TextEditingController(text: args.light);
+    paymentController = TextEditingController(text: args.payment);
     priceLightPaymentController =
         TextEditingController(text: args.priceLightPayment);
+
+    registerDiscountController.setActivationInactivationDate(
+      activation: args.dateActivation,
+      inactivation: args.dateInactivation,
+    );
 
     super.initState();
   }
@@ -275,7 +280,7 @@ class _RegisterDiscountPageState extends State<RegisterDiscountPage> {
           bottomNavigationBar: BottomAppBarWidget(
             title: 'Salvar',
             onPressed: () {
-              registerDiscountController.args = SaveDiscountArgs(
+              registerDiscountController.args = DiscountArgs(
                 discountName: discountNameController.text,
                 description: descriptionController.text,
                 discountType: discountTypeController.text,
@@ -289,7 +294,7 @@ class _RegisterDiscountPageState extends State<RegisterDiscountPage> {
                 dateActivation: registerDiscountController.activationDate,
                 dateInactivation: registerDiscountController.inactivationDate,
                 image: args.image ??
-                    registerDiscountController.imageFile.toString(),
+                    registerDiscountController.imageFile!.path.toString(),
               );
 
               final validateDiscountFields =

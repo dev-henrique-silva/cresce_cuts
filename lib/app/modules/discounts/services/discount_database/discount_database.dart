@@ -55,6 +55,18 @@ class DiscountDatabase implements IDiscountDatabase {
   }
 
   @override
+  Future<DiscountItemModel> fetchById(int id) async {
+    final database = await _databaseService.database;
+    final List<Map<String, dynamic>> discount = await database.query(
+      tableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    return DiscountItemModel.fromSqlfiteDatabase(discount.first);
+  }
+
+  @override
   Future<void> delete(int id) async {
     final database = await _databaseService.database;
     await database.delete(

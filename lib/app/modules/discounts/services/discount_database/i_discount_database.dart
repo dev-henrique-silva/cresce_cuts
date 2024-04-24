@@ -5,6 +5,7 @@ abstract class IDiscountDatabase {
   Future<void> createTable(Database database);
   Future<void> insert(Map<String, dynamic> data);
   Future<void> update(Map<String, dynamic> data);
+  Future<DiscountItemModel> fetchById(int id);
   Future<void> delete(int id);
   Future<void> deleteAll();
   Future<List<Map<String, dynamic>>> getData();

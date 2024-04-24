@@ -97,7 +97,16 @@ class _DiscountsPageState extends State<DiscountsPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: DismissibleWidget(
                   child: GestureDetector(
-                    onTap: () => {},
+                    onTap: () => {
+                      Modular.to
+                          .pushNamed(
+                        '/details_discount',
+                        arguments: discount,
+                      )
+                          .then((value) {
+                        discountController.fetchAllDatabase();
+                      }),
+                    },
                     child: CardDiscountWidget(
                       discount: discount,
                       discountController: discountController,
@@ -113,19 +122,22 @@ class _DiscountsPageState extends State<DiscountsPage> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBarWidget(
-        title: 'Cadastrar desconto',
-        onPressed: () => {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return BottomSheetDiscountTypeWidget(
-                route: '/register_discount',
-              );
-            },
-          ),
-        },
-      ),
+      bottomNavigationBar: Observer(builder: (context) {
+        return BottomAppBarWidget(
+          isLoading: discountController.discounts == null,
+          title: 'Cadastrar desconto',
+          onPressed: () => {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return BottomSheetDiscountTypeWidget(
+                  route: '/register_discount',
+                );
+              },
+            ),
+          },
+        );
+      }),
     );
   }
 
