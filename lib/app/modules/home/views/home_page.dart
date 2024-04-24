@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
             return BottomAppBarWidget(
               isLoading: controller.isLoading,
               hideBottomAppBar: controller.loadingError,
-              title: 'Desconto',
+              title: 'Descontos',
               onPressed: () => {
                 Modular.to.pushNamed(
                   '/discount',
