@@ -281,6 +281,7 @@ class _RegisterDiscountPageState extends State<RegisterDiscountPage> {
             title: 'Salvar',
             onPressed: () {
               registerDiscountController.args = DiscountArgs(
+                id: args.id,
                 discountName: discountNameController.text,
                 description: descriptionController.text,
                 discountType: discountTypeController.text,

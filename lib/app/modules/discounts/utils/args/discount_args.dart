@@ -1,4 +1,5 @@
 class DiscountArgs {
+  final int? id;
   final bool isActive;
   final String discountName;
   final String description;
@@ -17,6 +18,7 @@ class DiscountArgs {
   final String image;
 
   DiscountArgs({
+    this.id,
     this.isActive = false,
     required this.discountName,
     required this.description,

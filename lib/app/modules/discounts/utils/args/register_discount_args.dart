@@ -1,4 +1,5 @@
 class RegisterDiscountArgs {
+  final int? id;
   final bool isActive;
   final String? title;
   final String? description;
@@ -19,6 +20,7 @@ class RegisterDiscountArgs {
   final String? dateInactivation;
 
   RegisterDiscountArgs({
+    this.id,
     this.isActive = false,
     this.title,
     this.description,
@@ -40,6 +42,7 @@ class RegisterDiscountArgs {
   });
 
   copyWith({
+    int? id,
     bool? isActive,
     String? title,
     String? description,
@@ -60,6 +63,7 @@ class RegisterDiscountArgs {
     String? dateInactivation,
   }) {
     return RegisterDiscountArgs(
+      id: id ?? this.id,
       isActive: isActive ?? this.isActive,
       title: title ?? this.title,
       description: description ?? this.description,

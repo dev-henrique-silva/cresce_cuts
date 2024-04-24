@@ -6,6 +6,7 @@ import 'package:valevantagens/app/modules/discounts/widgets/display_light_paymen
 import 'package:valevantagens/app/modules/discounts/widgets/display_percentagem_widget.dart';
 import 'package:valevantagens/app/modules/discounts/widgets/display_precification_widget.dart';
 import 'package:valevantagens/app/modules/discounts/widgets/inactive_campaign_widget.dart';
+import 'package:valevantagens/app/utils/enum/discount_type_enum.dart';
 
 class DisplaysDiscountWidget extends StatefulWidget {
   final DiscountItemModel args;
@@ -36,7 +37,7 @@ class _DisplaysDiscountWidgetState extends State<DisplaysDiscountWidget> {
           Row(
             children: [
               Visibility(
-                visible: args.priceBy != null,
+                visible: args.discountType == DiscountsType.precificacao.texto,
                 child: DispplayPrecificationWidget(
                   priceOf: args.priceOf ?? 0.0,
                   priceBy: args.priceBy ?? 0.0,
@@ -44,7 +45,7 @@ class _DisplaysDiscountWidgetState extends State<DisplaysDiscountWidget> {
                 ),
               ),
               Visibility(
-                visible: args.pricePercentage != null,
+                visible: args.discountType == DiscountsType.percentual.texto,
                 child: DisplayPercentagemWidget(
                   pricePercentage: args.pricePercentage ?? 0.0,
                   percentage: args.percentage ?? 0,
@@ -52,7 +53,7 @@ class _DisplaysDiscountWidgetState extends State<DisplaysDiscountWidget> {
                 ),
               ),
               Visibility(
-                visible: args.priceLightPayment != null,
+                visible: args.discountType == DiscountsType.levePague.texto,
                 child: DisplayLightPaymentWidget(
                   light: args.light ?? 0,
                   payment: args.payment ?? 0,

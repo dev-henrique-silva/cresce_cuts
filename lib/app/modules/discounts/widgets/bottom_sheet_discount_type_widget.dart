@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:valevantagens/app/modules/discounts/utils/args/register_discount_args.dart';
+import 'package:valevantagens/app/utils/enum/discount_type_enum.dart';
 
 class BottomSheetDiscountTypeWidget extends StatefulWidget {
   final RegisterDiscountArgs? args;
@@ -68,7 +69,8 @@ class _BottomSheetDiscountTypeWidgetState
                 onTap: () {
                   goToRegisterDiscount(
                     args: args.copyWith(
-                      discountType: 'Precificação',
+                      id: args.id,
+                      discountType: DiscountsType.precificacao.texto,
                       discountForPrice: true,
                       priceOf: args.price,
                     ),
@@ -100,7 +102,8 @@ class _BottomSheetDiscountTypeWidgetState
                 onTap: () {
                   goToRegisterDiscount(
                     args: args.copyWith(
-                      discountType: 'Percentual',
+                      id: args.id,
+                      discountType: DiscountsType.percentual.texto,
                       discountForPercentage: true,
                       pricePercentage: args.price,
                     ),
@@ -132,7 +135,8 @@ class _BottomSheetDiscountTypeWidgetState
                 onTap: () {
                   goToRegisterDiscount(
                     args: args.copyWith(
-                      discountType: 'Leve Pague',
+                      id: args.id,
+                      discountType: DiscountsType.levePague.texto,
                       discountForLightPayment: true,
                       priceLightPayment: args.price,
                     ),

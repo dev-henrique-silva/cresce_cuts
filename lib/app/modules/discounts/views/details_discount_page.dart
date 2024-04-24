@@ -138,16 +138,21 @@ class _DetailsDiscountPageState extends State<DetailsDiscountPage> {
             builder: (context) {
               return BottomSheetDiscountTypeWidget(
                 args: RegisterDiscountArgs(
+                  id: args.id,
                   title: args.discountName,
                   description: args.description,
                   discountType: args.discountType,
                   price: selectPrice(args.discountType).toString(),
-                  priceOf: args.priceOf.toString(),
-                  priceBy: args.priceBy.toString(),
-                  pricePercentage: args.pricePercentage.toString(),
-                  light: args.light.toString(),
-                  payment: args.payment.toString(),
-                  priceLightPayment: args.priceLightPayment.toString(),
+                  priceOf: args.priceOf != null ? args.priceOf.toString() : '',
+                  priceBy: args.priceBy != null ? args.priceBy.toString() : '',
+                  pricePercentage: args.pricePercentage != null
+                      ? args.pricePercentage.toString()
+                      : '',
+                  light: args.light != null ? args.light.toString() : '',
+                  payment: args.payment != null ? args.payment.toString() : '',
+                  priceLightPayment: args.priceLightPayment != null
+                      ? args.priceLightPayment.toString()
+                      : '',
                   dateActivation: args.dateActivation.toString(),
                   dateInactivation: args.dateInactivation.toString(),
                   image: args.image,

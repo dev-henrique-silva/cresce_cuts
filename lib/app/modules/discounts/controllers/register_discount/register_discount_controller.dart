@@ -183,6 +183,7 @@ abstract class _RegisterDiscountControllerBase with Store {
   @action
   void saveDiscount({required DiscountArgs args}) {
     final discount = DiscountItemModel(
+      id: args.id,
       isActive: validateDiscountIsActive(
         activationDate: args.dateActivation,
         inactivationDate: args.dateInactivation,
@@ -211,6 +212,13 @@ abstract class _RegisterDiscountControllerBase with Store {
       dateInactivation: args.dateInactivation,
       image: args.image,
     );
+
+    if (discount.id != null) {
+      updateDiscount(
+        discountItem: discount,
+      );
+      return;
+    }
 
     insertDiscount(
       discountItem: discount,
