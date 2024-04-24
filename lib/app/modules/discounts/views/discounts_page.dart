@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:valevantagens/app/modules/common/widgets/bottom_app_bar_widget.dart';
 import 'package:valevantagens/app/modules/discounts/controllers/discounts/discounts_controller.dart';
 import 'package:valevantagens/app/modules/discounts/widgets/bottom_sheet_discount_type_widget.dart';
 import 'package:valevantagens/app/modules/discounts/widgets/card_discount_widget.dart';
+import 'package:valevantagens/app/modules/discounts/widgets/dismissible_widget.dart';
 import 'package:valevantagens/app/modules/discounts/widgets/empty_discount_list_widget.dart';
-import 'package:valevantagens/app/modules/home/widgets/skeleton/card_product_skeleton.dart';
+import 'package:valevantagens/app/modules/discounts/widgets/skeleton/card_descount_skeleton.dart';
 
 class DiscountsPage extends StatefulWidget {
   final DiscountController discountController;
@@ -46,24 +48,44 @@ class _DiscountsPageState extends State<DiscountsPage> {
             color: Theme.of(context).colorScheme.secondary,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Modular.to.pushNamedAndRemoveUntil('/', (p0) => false);
           },
         ),
+        actions: [
+          Observer(
+            builder: (_) {
+              return discountController.discounts != null &&
+                      discountController.discounts!.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                        onPressed: () {
+                          deleteAllDiscounts();
+                        },
+                      ),
+                    )
+                  : Container();
+            },
+          )
+        ],
       ),
       body: Observer(
         builder: (_) {
-          if (discountController.discounts!.result == null) {
-            discountController.isLoading = true;
-            return CardProductSkeleton();
+          if (discountController.discounts == null) {
+            return CardDiscountSkeleton();
           }
 
-          if (discountController.discounts!.result.isEmpty) {
-            discountController.hideBottomAppBar = true;
+          if (discountController.discounts!.isEmpty) {
             return EmptyDiscountListWidget();
           }
 
-          final discounts = discountController.discounts!.result;
-          discountController.isLoading = false;
+          final discounts = discountController.discounts!;
+
+          discountController.verifyActiveDiscounts(discounts);
 
           return ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
@@ -73,34 +95,80 @@ class _DiscountsPageState extends State<DiscountsPage> {
 
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () => {},
-                  child: CardDiscountWidget(discount: discount),
+                child: DismissibleWidget(
+                  child: GestureDetector(
+                    onTap: () => {},
+                    child: CardDiscountWidget(
+                      discount: discount,
+                      discountController: discountController,
+                    ),
+                  ),
+                  onPressed: () {
+                    discountController.deleteDiscount(id: discount.id!);
+                    Navigator.pop(context);
+                  },
                 ),
               );
             },
           );
         },
       ),
-      bottomNavigationBar: Observer(
-        builder: (_) {
-          return BottomAppBarWidget(
-            isLoading: discountController.isLoading,
-            hideBottomAppBar: discountController.hideBottomAppBar,
-            title: 'Cadastrar desconto',
-            onPressed: () => {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return BottomSheetDiscountTypeWidget(
-                    route: '/register_discount',
-                  );
-                },
-              ),
+      bottomNavigationBar: BottomAppBarWidget(
+        title: 'Cadastrar desconto',
+        onPressed: () => {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return BottomSheetDiscountTypeWidget(
+                route: '/register_discount',
+              );
             },
-          );
+          ),
         },
       ),
+    );
+  }
+
+  void deleteAllDiscounts() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Apagar todos os descontos',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          content: Text(
+            'Deseja realmente apagar todos os descontos?',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          actions: [
+            MaterialButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Cancelar',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
+            ),
+            MaterialButton(
+              onPressed: () {
+                discountController.deleteAllDatabase();
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Confirmar',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

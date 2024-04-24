@@ -11,8 +11,16 @@ class Formatter {
           _realBrasilFormat.format(double.parse(value)).replaceAll('R\$', '');
   }
 
-  static toCurrecyDolar(String value) {
-    if (value.isNotEmpty) double.parse(value.trim().replaceAll(',', '.'));
+  static toCurrecyDolar(String? value) {
+    if (value != null && value.isNotEmpty) {
+      return double.tryParse(value.trim().replaceAll(',', '.'));
+    }
+  }
+
+  static StringToInt(String? value) {
+    if (value != null && value.isNotEmpty) {
+      return int.tryParse(value.trim());
+    }
   }
 
   static String formatterDate(DateTime? dataTime) {

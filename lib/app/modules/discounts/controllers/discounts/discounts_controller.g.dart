@@ -45,13 +45,13 @@ mixin _$DiscountController on _DiscountControllerBase, Store {
       Atom(name: '_DiscountControllerBase.discounts', context: context);
 
   @override
-  ObservableFuture<List<DiscountItemModel>>? get discounts {
+  List<DiscountItemModel>? get discounts {
     _$discountsAtom.reportRead();
     return super.discounts;
   }
 
   @override
-  set discounts(ObservableFuture<List<DiscountItemModel>>? value) {
+  set discounts(List<DiscountItemModel>? value) {
     _$discountsAtom.reportWrite(value, super.discounts, () {
       super.discounts = value;
     });
@@ -63,6 +63,46 @@ mixin _$DiscountController on _DiscountControllerBase, Store {
   @override
   Future<dynamic> fetchAllDatabase() {
     return _$fetchAllDatabaseAsyncAction.run(() => super.fetchAllDatabase());
+  }
+
+  late final _$deleteAllDatabaseAsyncAction = AsyncAction(
+      '_DiscountControllerBase.deleteAllDatabase',
+      context: context);
+
+  @override
+  Future<dynamic> deleteAllDatabase() {
+    return _$deleteAllDatabaseAsyncAction.run(() => super.deleteAllDatabase());
+  }
+
+  late final _$deleteDiscountAsyncAction =
+      AsyncAction('_DiscountControllerBase.deleteDiscount', context: context);
+
+  @override
+  Future<dynamic> deleteDiscount({required int id}) {
+    return _$deleteDiscountAsyncAction.run(() => super.deleteDiscount(id: id));
+  }
+
+  late final _$updateDiscountAsyncAction =
+      AsyncAction('_DiscountControllerBase.updateDiscount', context: context);
+
+  @override
+  Future<dynamic> updateDiscount({required DiscountItemModel discountItem}) {
+    return _$updateDiscountAsyncAction
+        .run(() => super.updateDiscount(discountItem: discountItem));
+  }
+
+  late final _$_DiscountControllerBaseActionController =
+      ActionController(name: '_DiscountControllerBase', context: context);
+
+  @override
+  dynamic verifyActiveDiscounts(List<DiscountItemModel> discounts) {
+    final _$actionInfo = _$_DiscountControllerBaseActionController.startAction(
+        name: '_DiscountControllerBase.verifyActiveDiscounts');
+    try {
+      return super.verifyActiveDiscounts(discounts);
+    } finally {
+      _$_DiscountControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

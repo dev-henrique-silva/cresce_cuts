@@ -8,8 +8,12 @@ class TextFieldWidget extends StatefulWidget {
   final double height;
   final double width;
   final bool enabled;
+  final bool numberType;
   final bool inputDoubleType;
+  final int limitCaracteres;
   final TextEditingController controller;
+  final FocusNode focusNode;
+
   const TextFieldWidget({
     Key? key,
     required this.label,
@@ -17,7 +21,10 @@ class TextFieldWidget extends StatefulWidget {
     this.width = double.infinity,
     this.enabled = true,
     required this.controller,
+    this.numberType = false,
     this.inputDoubleType = false,
+    this.limitCaracteres = 200,
+    required this.focusNode,
   }) : super(key: key);
 
   @override
@@ -29,8 +36,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   double get height => widget.height;
   double get width => widget.width;
   bool get enabled => widget.enabled;
+  bool get numberType => widget.numberType;
   bool get inputDoubleType => widget.inputDoubleType;
+  int get limitCaracteres => widget.limitCaracteres;
   TextEditingController get controller => widget.controller;
+  FocusNode get focusNode => widget.focusNode;
 
   Debouncer _debouncer = Debouncer(milliseconds: 1500);
 
@@ -53,17 +63,21 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           height: height,
           child: TextField(
             controller: controller,
+            focusNode: focusNode,
             maxLines: null,
             expands: true,
             enabled: enabled,
-            keyboardType: inputDoubleType
-                ? TextInputType.numberWithOptions(decimal: true)
+            keyboardType: numberType
+                ? inputDoubleType
+                    ? TextInputType.numberWithOptions(decimal: true)
+                    : TextInputType.number
                 : TextInputType.text,
             inputFormatters: inputDoubleType
                 ? <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
+                    LengthLimitingTextInputFormatter(limitCaracteres),
                   ]
-                : null,
+                : [LengthLimitingTextInputFormatter(limitCaracteres)],
             onChanged: (value) {
               if (inputDoubleType) {
                 _debouncer.run(

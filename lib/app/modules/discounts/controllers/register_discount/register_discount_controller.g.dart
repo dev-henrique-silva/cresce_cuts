@@ -9,6 +9,22 @@ part of 'register_discount_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RegisterDiscountController on _RegisterDiscountControllerBase, Store {
+  late final _$argsAtom =
+      Atom(name: '_RegisterDiscountControllerBase.args', context: context);
+
+  @override
+  SaveDiscountArgs? get args {
+    _$argsAtom.reportRead();
+    return super.args;
+  }
+
+  @override
+  set args(SaveDiscountArgs? value) {
+    _$argsAtom.reportWrite(value, super.args, () {
+      super.args = value;
+    });
+  }
+
   late final _$imageFileAtom =
       Atom(name: '_RegisterDiscountControllerBase.imageFile', context: context);
 
@@ -58,6 +74,23 @@ mixin _$RegisterDiscountController on _RegisterDiscountControllerBase, Store {
     });
   }
 
+  late final _$isDiscountActiveAtom = Atom(
+      name: '_RegisterDiscountControllerBase.isDiscountActive',
+      context: context);
+
+  @override
+  bool get isDiscountActive {
+    _$isDiscountActiveAtom.reportRead();
+    return super.isDiscountActive;
+  }
+
+  @override
+  set isDiscountActive(bool value) {
+    _$isDiscountActiveAtom.reportWrite(value, super.isDiscountActive, () {
+      super.isDiscountActive = value;
+    });
+  }
+
   late final _$insertDiscountAsyncAction = AsyncAction(
       '_RegisterDiscountControllerBase.insertDiscount',
       context: context);
@@ -87,12 +120,67 @@ mixin _$RegisterDiscountController on _RegisterDiscountControllerBase, Store {
     return _$getImageGalleryAsyncAction.run(() => super.getImageGallery());
   }
 
+  late final _$_RegisterDiscountControllerBaseActionController =
+      ActionController(
+          name: '_RegisterDiscountControllerBase', context: context);
+
+  @override
+  double calculatePercentage(
+      {double? price, int? percentage, String? discountType}) {
+    final _$actionInfo =
+        _$_RegisterDiscountControllerBaseActionController.startAction(
+            name: '_RegisterDiscountControllerBase.calculatePercentage');
+    try {
+      return super.calculatePercentage(
+          price: price, percentage: percentage, discountType: discountType);
+    } finally {
+      _$_RegisterDiscountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  double subtractNumbers(
+      {double? priceOf, double? priceBy, String? discountType}) {
+    final _$actionInfo = _$_RegisterDiscountControllerBaseActionController
+        .startAction(name: '_RegisterDiscountControllerBase.subtractNumbers');
+    try {
+      return super.subtractNumbers(
+          priceOf: priceOf, priceBy: priceBy, discountType: discountType);
+    } finally {
+      _$_RegisterDiscountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool validateFields({required SaveDiscountArgs args}) {
+    final _$actionInfo = _$_RegisterDiscountControllerBaseActionController
+        .startAction(name: '_RegisterDiscountControllerBase.validateFields');
+    try {
+      return super.validateFields(args: args);
+    } finally {
+      _$_RegisterDiscountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void saveDiscount({required SaveDiscountArgs args}) {
+    final _$actionInfo = _$_RegisterDiscountControllerBaseActionController
+        .startAction(name: '_RegisterDiscountControllerBase.saveDiscount');
+    try {
+      return super.saveDiscount(args: args);
+    } finally {
+      _$_RegisterDiscountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
+args: ${args},
 imageFile: ${imageFile},
 activationDate: ${activationDate},
-inactivationDate: ${inactivationDate}
+inactivationDate: ${inactivationDate},
+isDiscountActive: ${isDiscountActive}
     ''';
   }
 }

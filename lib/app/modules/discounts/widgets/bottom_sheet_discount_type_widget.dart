@@ -70,6 +70,7 @@ class _BottomSheetDiscountTypeWidgetState
                     args: args.copyWith(
                       discountType: 'Precificação',
                       discountForPrice: true,
+                      priceOf: args.price,
                     ),
                   );
                   Navigator.pop(context);
@@ -101,6 +102,7 @@ class _BottomSheetDiscountTypeWidgetState
                     args: args.copyWith(
                       discountType: 'Percentual',
                       discountForPercentage: true,
+                      pricePercentage: args.price,
                     ),
                   );
                   Navigator.pop(context);
@@ -132,6 +134,7 @@ class _BottomSheetDiscountTypeWidgetState
                     args: args.copyWith(
                       discountType: 'Leve Pague',
                       discountForLightPayment: true,
+                      priceLightPayment: args.price,
                     ),
                   );
                   Navigator.pop(context);
