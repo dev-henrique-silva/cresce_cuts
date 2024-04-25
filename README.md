@@ -19,7 +19,7 @@ O objetivo do aplicativo é criar uma campanhas de descontos. Selecionando os pr
   <li> Agendar uma campanha.</li>
   <li> Inativar ou reativar uma campanha.</li>
   <li> Editar uma campanha.</li>
-  <li> Escolher campanha entre os tipos: **Percentual:**,  **De: Por:**, **Leve Pague:**.</li>
+  <li> Escolher campanha entre os tipos: Percentual, De: Por:, Leve Pague.</li>
   <li> Excluir uma ou todas as campanhas.</li>
 </ul>
 
@@ -32,7 +32,7 @@ O objetivo do aplicativo é criar uma campanhas de descontos. Selecionando os pr
   <li> Navegação com rotas nomeadas</li>
   <li> Gerência de estado: Mobx</li>
   <li> Armazenamento de dados local: SQFlite</li>
-   Consumo de API: [Fake Store API](https://fakestoreapi.com).
+  <li> Consumo de API:  Fake Store API (https://fakestoreapi.com).</li>
 </ul>
 
 
