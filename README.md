@@ -35,6 +35,34 @@ O objetivo do aplicativo é criar uma campanhas de descontos. Selecionando os pr
   <li> Consumo de API:  Fake Store API (https://fakestoreapi.com).</li>
 </ul>
 
+## Passo a passo para a execução do app
+# Home
+<ul>
+  <li> Será feito a requisição para buscar e exibir a lista de produtos.</li>
+  <li> Ao clicar no botão Desconto, você será redirecionado para a tela de lista de desconto.</li>
+  <li> Ao clicar em um dos card, poderá ser visualizado o produto.</li>
+  <li> Ao clicar no botão Cadastrar desconto, irá abrir um BottomSheet com os tipos de descontos diponíveis.</li>
+  <li> Ao escolher um dos descontos, você será redirecionado para a tela de cadastrar desconto.</li>
+</ul>
+
+# Tela de Desconto
+<ul>
+  <li> Ira ser exibido uma lista com os desconto já criados, caso existam.</li>
+  <li> Ao clicar no botão Cadastrar desconto, irá abrir um BottomSheet com os tipos de descontos diponíveis.</li>
+  <li> Ao clicar em um dos card, poderá ser visualizado o desconto.</li>
+  <li> Ao clicar no botão Switch, poderá ativar ou desativar uma campanha.</li>
+  <li> Ao arrastar o card para o lado esquerdo, poderá excluir o desconto.</li>
+  <li> Na parte superior, ao clicar no ícone de lixeira, poderá escluir todos os seus descontos.</li>
+</ul>
+
+# Tela de Cadastro de Desconto
+<ul>
+  <li> Irá exibir os componentes referentes ao tipo de desconto escolhido.</li>
+  <li> Caso você esteja editando um desconto ou venha da tela de visualizar produto, algumas informações já estarão preenchidas.</li>
+  <li> O não preencimento de um dos campos, exibirá um mensagem informando que todos os campos devem ser preenchidos.</li>
+  <li> Poderá escolher uma image local do seu dispositivo para adicionar ao desconto.</li>
+  <li> Ao finalizar com sucesso o cadastro ou edição de um desconto, será redirecionado para a lista de desconto.</li>
+</ul>
 
 ## Telas:
 
