@@ -70,7 +70,7 @@ O objetivo do aplicativo é criar uma campanhas de descontos. Selecionando os pr
 
 
   <tr>
-     <td style="text-align:center;" width="240"><img src="https://github.com/dev-henrique-silva/dev-henrique-silva/assets/81243358/f4d84415-ae4c-43f4-8c1d-5490f0a4ae7b" 
+     <td style="text-align:center;" width="290"><img src="https://github.com/dev-henrique-silva/cresce_cuts/assets/81243358/2b07acfc-9497-4a58-814d-b5f0c8b88767" 
          alt="Splash Screen"/></td>
      <td style="text-align:center;" width="240" ><img src="https://github.com/dev-henrique-silva/dev-henrique-silva/assets/81243358/ca6a1987-dd14-47fd-befa-14bbb6539ca6" 
          alt="Home Skeleton"/></td>
